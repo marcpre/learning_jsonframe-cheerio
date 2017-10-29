@@ -19,6 +19,7 @@
   "homepage": "https://github.com/marcpre/learning_jsonframe-cheerio#readme",
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
+    "got": "^7.1.0",
     "jsonframe-cheerio": "^3.0.1"
   }
 }
