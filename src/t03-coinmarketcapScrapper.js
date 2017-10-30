@@ -1,6 +1,7 @@
 const cheerio = require('cheerio')
 const jsonframe = require('jsonframe-cheerio')
-const got = require('got');
+const got = require('got')
+const fs = require('fs')
 
 async function scrapCoinmarketCap() {
 	const url = 'https://coinmarketcap.com/all/views/all/'
@@ -10,15 +11,29 @@ async function scrapCoinmarketCap() {
 	jsonframe($) // initializing the plugin
 
 	let frame = {
-		"Coin": "td.no-wrap.currency-name > a",
-		"url": "td.no-wrap.currency-name > a @ href",
-		"Symbol": "td.text-left.col-symbol",
-		"Price": "td:nth-child(5) > a",
+		currency: {
+			_s: "tr", // the selector
+			_d: [{ // allow you to get an array of data, not just the first item
+				"Coin": "td.no-wrap.currency-name > a",
+				"Url": "td.no-wrap.currency-name > a @ href",
+				"Symbol": "td.text-left.col-symbol",
+				"Price": "td:nth-child(5) > a"
+			}]
+		}
 	}
 
-	console.log($('body').scrape(frame, {
+	const data = JSON.stringify($('body').scrape(frame, {
 		string: true
 	}))
+	
+	console.log(data)
+
+	fs.writeFile("../data/allCoins.json", data, 'utf8', function(err) {
+		if (err) {
+			return console.log(err);
+		}
+		console.log("The file was saved!");
+	})
 }
 
 scrapCoinmarketCap()
