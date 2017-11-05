@@ -9,7 +9,7 @@ async function scrapCoinmarketCap() {
 
 	jsonframe($) // initializing the plugin
 
-	let frame = {
+	let frame = { 
 		"Coin": "td.no-wrap.currency-name > a",
 		"url": "td.no-wrap.currency-name > a @ href",
 		"Symbol": "td.text-left.col-symbol",
