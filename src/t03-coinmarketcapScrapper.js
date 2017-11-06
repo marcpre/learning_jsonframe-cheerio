@@ -21,15 +21,6 @@ async function scrapCoinmarketCap() {
 				MarketCap: 'td.no-wrap.market-cap.text-right',
 				CirculatingSupply: 'td.no-wrap.text-right.circulating-supply > a @ data-supply',
 				Volume24h: 'td:nth-child(7) > a @ data-usd',
-				Twitter: ' ',
-				Reddit: ' ',
-				Website1: ' ',
-				Website2: ' ',
-				Website3: ' ',
-				Website4: ' ',
-				MessageBoard1: ' ',
-				MessageBoard2: ' ',
-				MessageBoard3: ' ',
 			}]
 		}
 	}
@@ -38,7 +29,7 @@ async function scrapCoinmarketCap() {
 		string: true
 	})
 
-	console.log(data)
+	console.log(data.currency[1])
 
 	fs.writeFile("../data/allCoins.json", data, 'utf8', function(err) {
 		if (err) {
