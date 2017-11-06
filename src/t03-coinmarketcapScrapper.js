@@ -14,18 +14,30 @@ async function scrapCoinmarketCap() {
 		currency: {
 			_s: "tr", // the selector
 			_d: [{ // allow you to get an array of data, not just the first item
-				"Coin": "td.no-wrap.currency-name > a",
-				"Url": "td.no-wrap.currency-name > a @ href",
-				"Symbol": "td.text-left.col-symbol",
-				"Price": "td:nth-child(5) > a"
+				CoinName: 'td.no-wrap.currency-name > a',
+				Url: 'td.no-wrap.currency-name > a @ href',
+				Symbol: 'td.text-left.col-symbol',
+				Price: 'td:nth-child(5) > a',
+				MarketCap: 'td.no-wrap.market-cap.text-right',
+				CirculatingSupply: 'td.no-wrap.text-right.circulating-supply > a @ data-supply',
+				Volume24h: 'td:nth-child(7) > a @ data-usd',
+				Twitter: ' ',
+				Reddit: ' ',
+				Website1: ' ',
+				Website2: ' ',
+				Website3: ' ',
+				Website4: ' ',
+				MessageBoard1: ' ',
+				MessageBoard2: ' ',
+				MessageBoard3: ' ',
 			}]
 		}
 	}
 
-	const data = JSON.stringify($('body').scrape(frame, {
+	const data = $('body').scrape(frame, {
 		string: true
-	}))
-	
+	})
+
 	console.log(data)
 
 	fs.writeFile("../data/allCoins.json", data, 'utf8', function(err) {
