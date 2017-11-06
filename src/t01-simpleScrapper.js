@@ -9,9 +9,9 @@ const $ = cheerio.load(`
 
 jsonframe($) // initializing the plugin
 
-let frame = {
-	"title": "h1", // this is an inline selector
-	"email": "span[itemprop=email] < email" // output an extracted email
+const frame = {
+  title: 'h1', // this is an inline selector
+  email: 'span[itemprop=email] < email', // output an extracted email
 }
 
-console.log( $('body').scrape(frame, { string: true } ))
+console.log($('body').scrape(frame, { string: true }))
